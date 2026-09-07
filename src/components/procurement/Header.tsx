@@ -24,27 +24,47 @@ export function Header() {
       </div>
 
       <nav className="hidden items-center gap-1 md:flex">
-        <Button variant="ghost" size="sm" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-sm font-medium text-muted-foreground hover:text-foreground"
+        >
           Dashboard
         </Button>
         <Button variant="ghost" size="sm" className="text-sm font-medium text-foreground">
           NiT Generation
         </Button>
-        <Button variant="ghost" size="sm" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-sm font-medium text-muted-foreground hover:text-foreground"
+        >
           Library
         </Button>
       </nav>
 
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground hover:text-foreground">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-9 w-9 text-muted-foreground hover:text-foreground"
+        >
           <Bell className="h-[18px] w-[18px]" />
         </Button>
-        <Button variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground hover:text-foreground">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-9 w-9 text-muted-foreground hover:text-foreground"
+        >
           <Settings className="h-[18px] w-[18px]" />
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full border border-border bg-muted">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-9 w-9 rounded-full border border-border bg-muted"
+            >
               <User className="h-[18px] w-[18px] text-muted-foreground" />
             </Button>
           </DropdownMenuTrigger>

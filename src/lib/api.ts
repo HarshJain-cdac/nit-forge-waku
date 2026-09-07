@@ -11,7 +11,7 @@ export interface ChatResponse {
 
 export async function sendChatMessage(
   message: string,
-  history: ChatHistoryItem[]
+  history: ChatHistoryItem[],
 ): Promise<ChatResponse | null> {
   if (!API_BASE) {
     return null;

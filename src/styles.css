@@ -184,7 +184,11 @@
 }
 
 @utility gradient-brand {
-  background: linear-gradient(135deg, var(--color-brand-gradient-start), var(--color-brand-gradient-end));
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-gradient-start),
+    var(--color-brand-gradient-end)
+  );
 }
 
 @utility shadow-nit {

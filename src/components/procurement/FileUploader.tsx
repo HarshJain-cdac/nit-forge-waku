@@ -28,7 +28,7 @@ export function FileUploader({
         e.target.value = "";
       }
     },
-    [onUpload]
+    [onUpload],
   );
 
   const handleDrop = useCallback(
@@ -38,14 +38,26 @@ export function FileUploader({
         onUpload(e.dataTransfer.files);
       }
     },
-    [onUpload]
+    [onUpload],
   );
 
   if (variant === "icon") {
     return (
       <>
-        <input ref={inputRef} type="file" accept={accept} multiple className="hidden" onChange={handleChange} />
-        <Button variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground hover:text-foreground" onClick={handleClick}>
+        <input
+          ref={inputRef}
+          type="file"
+          accept={accept}
+          multiple
+          className="hidden"
+          onChange={handleChange}
+        />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-9 w-9 text-muted-foreground hover:text-foreground"
+          onClick={handleClick}
+        >
           <Paperclip className="h-[18px] w-[18px]" />
         </Button>
       </>
@@ -65,16 +77,32 @@ export function FileUploader({
         </div>
         <div>
           <p className="text-sm font-medium text-foreground">{label}</p>
-          <p className="mt-1 text-xs text-muted-foreground">PDF, DOCX, XLSX and other procurement documents</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            PDF, DOCX, XLSX and other procurement documents
+          </p>
         </div>
-        <input ref={inputRef} type="file" accept={accept} multiple className="hidden" onChange={handleChange} />
+        <input
+          ref={inputRef}
+          type="file"
+          accept={accept}
+          multiple
+          className="hidden"
+          onChange={handleChange}
+        />
       </div>
     );
   }
 
   return (
     <>
-      <input ref={inputRef} type="file" accept={accept} multiple className="hidden" onChange={handleChange} />
+      <input
+        ref={inputRef}
+        type="file"
+        accept={accept}
+        multiple
+        className="hidden"
+        onChange={handleChange}
+      />
       <Button
         variant="outline"
         className="gap-2 border-border bg-background text-sm font-medium text-foreground shadow-soft hover:bg-muted hover:text-foreground"

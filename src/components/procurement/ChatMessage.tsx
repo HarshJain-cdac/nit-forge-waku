@@ -16,7 +16,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
           "max-w-[90%] rounded-2xl px-4 py-3 md:max-w-[80%]",
           isUser
             ? "rounded-br-md bg-waku-user text-waku-user-foreground"
-            : "rounded-bl-md border border-border bg-waku-bot text-waku-bot-foreground shadow-soft"
+            : "rounded-bl-md border border-border bg-waku-bot text-waku-bot-foreground shadow-soft",
         )}
       >
         <div className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</div>
@@ -38,9 +38,18 @@ export function ChatMessage({ message }: ChatMessageProps) {
         )}
         {message.isTyping && (
           <div className="mt-2 flex items-center gap-1">
-            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-waku-bot-accent" style={{ animationDelay: "0ms" }} />
-            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-waku-bot-accent" style={{ animationDelay: "150ms" }} />
-            <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-waku-bot-accent" style={{ animationDelay: "300ms" }} />
+            <span
+              className="h-1.5 w-1.5 animate-bounce rounded-full bg-waku-bot-accent"
+              style={{ animationDelay: "0ms" }}
+            />
+            <span
+              className="h-1.5 w-1.5 animate-bounce rounded-full bg-waku-bot-accent"
+              style={{ animationDelay: "150ms" }}
+            />
+            <span
+              className="h-1.5 w-1.5 animate-bounce rounded-full bg-waku-bot-accent"
+              style={{ animationDelay: "300ms" }}
+            />
           </div>
         )}
       </div>

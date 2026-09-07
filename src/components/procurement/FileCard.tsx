@@ -30,9 +30,7 @@ export function FileCard({ file, onRemove }: FileCardProps) {
         <span className="text-xs text-muted-foreground">
           {file.type.toUpperCase()} · {file.size}
         </span>
-        {file.status === "uploading" && (
-          <Progress value={file.progress} className="mt-2 h-1" />
-        )}
+        {file.status === "uploading" && <Progress value={file.progress} className="mt-2 h-1" />}
       </div>
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-1.5 rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground">

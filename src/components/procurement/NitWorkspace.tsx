@@ -79,7 +79,9 @@ export function NitWorkspace({
             {files.length === 0 ? (
               <div className="rounded-xl border border-dashed border-border bg-muted/30 p-6 text-center">
                 <p className="text-sm text-muted-foreground">No documents uploaded yet.</p>
-                <p className="mt-1 text-xs text-muted-foreground">Upload PDF, DOCX, or XLSX files to generate an NiT.</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Upload PDF, DOCX, or XLSX files to generate an NiT.
+                </p>
               </div>
             ) : (
               files.map((file) => <FileCard key={file.id} file={file} onRemove={onRemoveFile} />)

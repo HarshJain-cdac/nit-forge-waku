@@ -37,7 +37,7 @@ export function DocumentPreview({ title, sections }: DocumentPreviewProps) {
                       </ul>
                     ) : paragraph.trim() ? (
                       <p key={pIndex}>{paragraph.trim()}</p>
-                    ) : null
+                    ) : null,
                   )}
                 </div>
               </section>
