@@ -10,6 +10,7 @@ import type {
   DocumentStatus,
 } from "@/components/procurement/types";
 import { sendChatMessage } from "@/lib/api";
+import { defaultSections, aiGeneratedSections } from "@/components/procurement/nitTemplate";
 
 export const Route = createFileRoute("/")({
   component: ProcurementWorkspace,
@@ -30,72 +31,6 @@ export const Route = createFileRoute("/")({
     ],
   }),
 });
-
-const defaultSections: DocumentSection[] = [
-  {
-    title: "Introduction",
-    content:
-      "This Notice Inviting Tender (NiT) is issued by the procuring entity to invite eligible bidders to submit sealed tenders for the supply, installation, and commissioning of the goods and services described herein.\n\nThe purpose of this tender is to ensure a transparent, competitive, and fair procurement process in accordance with the applicable procurement regulations and organizational policies.",
-  },
-  {
-    title: "Scope of Work",
-    content:
-      "The selected bidder shall be responsible for the complete execution of the works as detailed in the technical specifications and bill of quantities annexed to this tender document.\n\n• Supply of all materials, equipment, and labor.\n• Installation, testing, and commissioning at designated sites.\n• Training of designated personnel on operation and maintenance.\n• Warranty and after-sales support for the contract period.",
-  },
-  {
-    title: "Eligibility Criteria",
-    content:
-      "Bidders must meet the following minimum eligibility requirements to participate in this tender:\n\n• Be a legally registered entity in good standing.\n• Possess relevant experience in similar projects over the last three years.\n• Demonstrate adequate financial capacity through audited financial statements.\n• Have no record of blacklisting or debarment from public procurement.",
-  },
-  {
-    title: "Technical Requirements",
-    content:
-      "All goods and services offered must conform to the technical specifications outlined in Annexure A.\n\n• Compliance with applicable national and international standards.\n• Submission of technical datasheets, brochures, and compliance certificates.\n• Proof of quality assurance certifications, where applicable.\n• Compatibility with existing infrastructure and systems.",
-  },
-  {
-    title: "Submission Requirements",
-    content:
-      "Bidders must submit their tenders in the prescribed format, complete in all respects, and enclosed in a sealed envelope marked with the tender reference number and title.\n\n• Technical proposal with company profile and experience records.\n• Financial proposal in a separately sealed envelope.\n• Earnest Money Deposit (EMD) as specified in the tender notice.\n• Validity of tenders for a minimum period of 90 days from the date of opening.",
-  },
-  {
-    title: "Important Dates",
-    content:
-      "• Issue of tender document: [Date]\n• Pre-bid meeting: [Date, Time, Venue]\n• Last date for submission of queries: [Date]\n• Bid submission deadline: [Date, Time]\n• Opening of technical bids: [Date, Time]\n• Opening of financial bids: [Date, Time]",
-  },
-];
-
-const aiGeneratedSections: DocumentSection[] = [
-  {
-    title: "Introduction",
-    content:
-      "This Notice Inviting Tender (NiT) is issued by the Department of Public Works to invite eligible and qualified bidders to submit competitive tenders for the procurement, installation, and commissioning of enterprise-grade IT infrastructure and associated services.\n\nThe procurement shall be conducted through an open competitive bidding process in accordance with the Public Procurement Act and the organization's procurement manual.",
-  },
-  {
-    title: "Scope of Work",
-    content:
-      "The contractor shall be responsible for the end-to-end delivery of the project, including but not limited to:\n\n• Supply of servers, networking equipment, and endpoint devices as per Annexure A.\n• Design, installation, and configuration of the network and data center environment.\n• Migration of existing workloads with minimal disruption to operations.\n• Comprehensive documentation and knowledge transfer to the IT team.\n• Annual Maintenance Contract (AMC) for a period of three years post-acceptance.",
-  },
-  {
-    title: "Eligibility Criteria",
-    content:
-      "Only bidders fulfilling the following criteria shall be considered eligible:\n\n• Registered company with at least five years of continuous operation in the relevant domain.\n• Minimum average annual turnover of INR 10 crore over the last three financial years.\n• Experience of having successfully completed at least three similar projects of comparable scale.\n• Valid ISO 9001 and ISO 27001 certifications.\n• No history of litigation, arbitration, or blacklisting by any government or public sector entity.",
-  },
-  {
-    title: "Technical Requirements",
-    content:
-      "The offered solution must meet or exceed the technical specifications detailed in Annexure B.\n\n• All hardware must carry original manufacturer warranty and support.\n• Software licenses must be genuine, perpetual, and transferable.\n• Solution must support high availability, redundancy, and disaster recovery.\n• Compliance with applicable cybersecurity and data protection standards.\n• Detailed implementation plan with milestones and acceptance criteria.",
-  },
-  {
-    title: "Submission Requirements",
-    content:
-      "Tenders must be submitted online through the e-procurement portal on or before the deadline. Hard copies, if required, must be sealed and superscribed with the tender reference number.\n\n• Technical bid with eligibility and technical documents.\n• Financial bid in the prescribed format, inclusive of all taxes and duties.\n• Earnest Money Deposit of INR 5,00,000 in the form of a demand draft or bank guarantee.\n• Tender validity of 120 days from the bid submission deadline.",
-  },
-  {
-    title: "Important Dates",
-    content:
-      "• Publication of NiT: 15 September 2026\n• Pre-bid conference: 22 September 2026, 11:00 AM\n• Last date for clarifications: 29 September 2026\n• Bid submission deadline: 10 October 2026, 15:00 IST\n• Technical bid opening: 10 October 2026, 16:00 IST\n• Financial bid opening: 20 October 2026, 11:00 IST",
-  },
-];
 
 const stricterEligibilitySections: DocumentSection[] = defaultSections.map((s) =>
   s.title === "Eligibility Criteria"
@@ -149,6 +84,13 @@ function ProcurementWorkspace() {
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
+  const [attachedAnnexureIds, setAttachedAnnexureIds] = useState<string[]>([]);
+
+  const handleToggleAnnexure = useCallback((id: string) => {
+    setAttachedAnnexureIds((prev) =>
+      prev.includes(id) ? prev.filter((a) => a !== id) : [...prev, id],
+    );
+  }, []);
 
   const processFiles = useCallback((fileList: FileList, attachToChat: boolean) => {
     const newFiles: UploadedFile[] = Array.from(fileList).map((file) => ({
@@ -209,13 +151,6 @@ function ProcurementWorkspace() {
       }, interval);
     });
   }, []);
-
-  const handleWorkspaceUpload = useCallback(
-    (fileList: FileList) => {
-      processFiles(fileList, false);
-    },
-    [processFiles],
-  );
 
   const handleChatUpload = useCallback(
     (fileList: FileList) => {
@@ -369,9 +304,8 @@ function ProcurementWorkspace() {
           title="Notice Inviting Tender"
           status={documentStatus}
           sections={sections}
-          files={files}
-          onUpload={handleWorkspaceUpload}
-          onRemoveFile={handleRemoveFile}
+          attachedAnnexureIds={attachedAnnexureIds}
+          onToggleAnnexure={handleToggleAnnexure}
           onGenerate={handleGenerate}
           onRegenerate={handleRegenerate}
         />
