@@ -1,0 +1,22 @@
+{
+  "annexures": [
+    {
+      "id": "annexure-5",
+      "code": "Annexure 5",
+      "title": "Domestically Manufactured Iron & Steel Products (DMI&SP) Policy",
+      "file": "Annexure5.html"
+    },
+    {
+      "id": "annexure-5-3",
+      "code": "Annexure 5.3",
+      "title": "Undertaking – Item Rate / EPC / Package Contracts",
+      "file": "Annexure5.3.html"
+    },
+    {
+      "id": "annexure-5-4",
+      "code": "Annexure 5.4",
+      "title": "Undertaking – Non-Applicability of DMI&SP Policy",
+      "file": "Annexure5.4.html"
+    }
+  ]
+}
