@@ -37,7 +37,7 @@ const stricterEligibilitySections: DocumentSection[] = defaultSections.map((s) =
     ? {
         ...s,
         content:
-          "Bidders must meet the following stringent eligibility requirements to participate in this tender:\n\n• Minimum 10 years of continuous operation in the relevant industry.\n• Average annual turnover of at least INR 50 crore over the last three financial years.\n• Proven track record of completing at least five projects of similar scope and complexity.\n• Valid ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 certifications.\n• Clean litigation record and no history of blacklisting by any government or statutory body.\n• Submission of a signed integrity pact and conflict-of-interest declaration.",
+          "Bidders shall satisfy the following enhanced qualifying requirements, supported by documentary evidence submitted with the Techno-Commercial Bid:\n\n• Minimum ten (10) years of continuous operation in electro-mechanical / process plant construction.\n• Average annual turnover of not less than INR 21.40 Crore during the last three audited financial years.\n• Successful completion of at least three (3) similar works, each of value not less than INR 25.65 Crore, in the last seven (7) years.\n• Valid ISO 9001:2015, ISO 14001:2015 and ISO 45001:2018 certifications.\n• In-house engineering, fabrication and testing facilities, supported by an asset declaration.\n• Lost Time Injury Frequency Rate (LTIFR) below 0.50 for the preceding three years, certified by the Bidder\u2019s HSE head.\n• No holiday listing, banning, arbitration or litigation with any Public Sector Undertaking as on the bid due date.\n• Signed Integrity Pact, conflict-of-interest declaration and DMI&SP undertakings in the prescribed annexure formats.",
       }
     : s,
 );
@@ -47,7 +47,7 @@ const modifiedSubmissionSections: DocumentSection[] = defaultSections.map((s) =>
     ? {
         ...s,
         content:
-          "Bidders must submit their tenders strictly in the prescribed format through the designated e-procurement portal. Incomplete or non-compliant submissions shall be summarily rejected.\n\n• Technical proposal with detailed methodology, work plan, and team credentials.\n• Financial proposal sealed separately and uploaded in the prescribed template.\n• Earnest Money Deposit of INR 2,00,000 via NEFT/RTGS or bank guarantee.\n• Tender validity of 180 days from the submission deadline.\n• Self-attested copies of GST registration, PAN, and incorporation certificate.\n• Power of attorney for the authorized signatory.",
+          "Bids shall be submitted strictly in the prescribed two-packet format through the e-Procurement portal. Incomplete, conditional or non-compliant bids shall be summarily rejected.\n\n• Packet-I: eligibility documents, methodology, Level-2 schedule, resource deployment plan and key personnel CVs.\n• Packet-II: priced bid in the prescribed Schedule of Rates template, exclusive of GST.\n• Earnest Money Deposit of INR 42,75,000 by Demand Draft or Bank Guarantee valid for 180 days.\n• Bid validity of 180 days from the date of bid opening.\n• Self-attested copies of GST, PAN, EPF, ESIC registrations and incorporation certificate.\n• Digitally signed Power of Attorney for the authorised signatory.\n• A no-deviation confirmation; deviations, if any, shall be listed only in the prescribed deviation schedule.",
       }
     : s,
 );
@@ -159,10 +159,6 @@ function ProcurementWorkspace() {
     [processFiles],
   );
 
-  const handleRemoveFile = useCallback((id: string) => {
-    setFiles((prev) => prev.filter((f) => f.id !== id));
-  }, []);
-
   const handleGenerate = useCallback(() => {
     setDocumentStatus("AI Generated");
     setSections(aiGeneratedSections);
@@ -172,7 +168,7 @@ function ProcurementWorkspace() {
     setDocumentStatus("AI Generated");
     setSections((prev) =>
       prev.map((s) =>
-        s.title === "Introduction"
+        s.title === "Introduction and Background"
           ? {
               ...s,
               content:
