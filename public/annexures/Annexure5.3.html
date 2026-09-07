@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Annexure 5.2</title>
+
+<style>
+body {
+    font-family: "Times New Roman", serif;
+    font-size: 16px;
+}
+
+.bold { font-weight: bold; }
+.center { text-align: center; }
+.right { text-align: right; }
+.underline { text-decoration: underline; }
+
+.field-row {
+            display: flex;
+        }
+         .field-label {
+            font-weight: bold;
+            width: 120px;
+            display: inline-block;
+        }
+        .field-value {
+            display: inline-block;
+        }
+        .field-colon {
+        width: 20px; /* keeps colon aligned */
+        text-align: left;
+        font-weight: bold;
+        }
+
+.section {
+    margin-top: 20px;
+}
+
+.signature {
+    margin-top: 80px;
+    text-align: right;
+}
+.annex5-subtitle {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Top Fields -->
+ <div class="field-row">
+    <div class="field-label" style="width: 120px;">Job Name</div>
+    <div class="field-colon">:</div>
+    <div class="field-value"><span style="background-color: yellow;">{{ item.name_of_proposal }}</span></div>
+</div>
+<div class="field-row">
+    <div class="field-label" style="width: 120px;">NRL Tender No.</div>
+    <div class="field-colon">:</div>
+    <div class="field-value"><span style="background-color: aqua;">{{ item.tender_no }}</span></div>
+</div>
+
+<!-- Annexure Title -->
+<div class="right bold" style="margin-top:20px;" id="annexure-5-3">Annexure 5.3</div>
+<div class="center bold underline">Undertaking - Item rate /EPC /Package Contracts </div>
+<div class="annex5-subtitle">(to be submitted in Bidder's letter head)</div>
+
+<div class="section underline">Item/Work:</div>
+<div class="underline">Bidding Document no:</div>
+
+<!-- Paragraph -->
+<div class="section">
+This has reference to “Policy for providing Preference to Domestically Manufactured Iron & Steel Products in Government Procurement” issued by Ministry of Steel, Govt. of India, vide their notification “The Gazette of India, Extraordinary Notification No. G.S.R. 904 (E) dated 17-12-2025 including its amendments thereafter (if any)”.
+</div>
+
+<div class="section">
+We confirm:
+</div>
+
+<div class="section">
+-  &nbsp;&nbsp;&nbsp; that we will comply the Policy for providing Preference to Domestically Manufactured Iron & Steel Products in Government Procurement” issued by Ministry of Steel, Govt. of India.
+</div>
+
+<div class="section">
+- &nbsp;&nbsp;&nbsp; that we will submit Affidavit of Self Certification of Domestic value addition in Iron & Steel Products and submit to Owner/ NRL during delivery of related to iron and steel products required under the enquiry document.
+</div>
+
+<!-- Signature -->
+<div class="signature">
+    <div style="border-bottom:1px solid black; width:180px; margin-left:auto;"></div><br>
+    <div class="bold">(Sign & Stamp of bidder)</div>
+</div>
+
+</body>
+</html>
