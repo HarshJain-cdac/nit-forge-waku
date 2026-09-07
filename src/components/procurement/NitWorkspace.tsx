@@ -1,19 +1,18 @@
+import { useEffect, useState } from "react";
 import { Wand2, Pencil, RefreshCw, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { StatusBadge } from "./StatusBadge";
-import { FileUploader } from "./FileUploader";
-import { FileCard } from "./FileCard";
 import { DocumentPreview } from "./DocumentPreview";
-import type { UploadedFile, DocumentSection, DocumentStatus } from "./types";
+import { AnnexurePanel } from "./AnnexurePanel";
+import { loadAnnexures, type AnnexureTemplate } from "./annexures";
+import type { DocumentSection, DocumentStatus } from "./types";
 
 interface NitWorkspaceProps {
   title: string;
   status: DocumentStatus;
   sections: DocumentSection[];
-  files: UploadedFile[];
-  onUpload: (files: FileList) => void;
-  onRemoveFile: (id: string) => void;
+  attachedAnnexureIds: string[];
+  onToggleAnnexure: (id: string) => void;
   onGenerate: () => void;
   onRegenerate: () => void;
 }
@@ -22,12 +21,19 @@ export function NitWorkspace({
   title,
   status,
   sections,
-  files,
-  onUpload,
-  onRemoveFile,
+  attachedAnnexureIds,
+  onToggleAnnexure,
   onGenerate,
   onRegenerate,
 }: NitWorkspaceProps) {
+  const [annexures, setAnnexures] = useState<AnnexureTemplate[]>([]);
+
+  useEffect(() => {
+    void loadAnnexures().then(setAnnexures);
+  }, []);
+
+  const attached = annexures.filter((a) => attachedAnnexureIds.includes(a.id));
+
   return (
     <div className="flex h-full flex-col overflow-hidden bg-background">
       <div className="flex flex-col gap-4 border-b border-border bg-background px-6 py-4 md:flex-row md:items-center md:justify-between">
@@ -72,27 +78,13 @@ export function NitWorkspace({
         </Button>
       </div>
 
-      <div className="flex flex-col gap-4 overflow-hidden p-6 md:flex-row">
-        <div className="flex w-full flex-col gap-4 md:w-80 lg:w-96">
-          <FileUploader onUpload={onUpload} label="Upload Files" />
-          <div className="flex flex-col gap-3 overflow-y-auto rounded-2xl">
-            {files.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-border bg-muted/30 p-6 text-center">
-                <p className="text-sm text-muted-foreground">No documents uploaded yet.</p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Upload PDF, DOCX, or XLSX files to generate an NiT.
-                </p>
-              </div>
-            ) : (
-              files.map((file) => <FileCard key={file.id} file={file} onRemove={onRemoveFile} />)
-            )}
-          </div>
+      <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-6 lg:flex-row lg:overflow-hidden">
+        <div className="w-full shrink-0 lg:w-72 xl:w-80">
+          <AnnexurePanel attachedIds={attachedAnnexureIds} onToggle={onToggleAnnexure} />
         </div>
 
-        <Separator orientation="vertical" className="hidden md:block" />
-
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-muted/20">
-          <DocumentPreview title={title} sections={sections} />
+          <DocumentPreview title={title} sections={sections} annexures={attached} />
         </div>
       </div>
     </div>
