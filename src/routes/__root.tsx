@@ -78,14 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Waku Procurement AI" },
+      { name: "description", content: "Generate professional Notice Inviting Tender documents with Waku AI." },
+      { name: "author", content: "Waku Procurement AI" },
+      { property: "og:title", content: "Waku Procurement AI" },
+      { property: "og:description", content: "Generate professional Notice Inviting Tender documents with Waku AI." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@waku" },
     ],
     links: [
       {
