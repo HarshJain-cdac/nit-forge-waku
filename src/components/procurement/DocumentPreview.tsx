@@ -16,8 +16,8 @@ export function DocumentPreview({ title, sections }: DocumentPreviewProps) {
             <h1 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
               {title}
             </h1>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Notice Inviting Tender
+            <p className="mt-2 text-sm font-medium uppercase tracking-widest text-muted-foreground">
+              Procurement Document
             </p>
           </header>
 
